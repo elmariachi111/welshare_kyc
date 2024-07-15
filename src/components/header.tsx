@@ -8,12 +8,13 @@ import {
 } from "@nextui-org/navbar";
 
 import CustomSIWEButton from "./CustomSiweButton";
+import Image from "next/image";
 
 export default function Header() {
   return (
     <Navbar>
       <NavbarBrand>
-        <p className="font-bold text-inherit">welshare</p>
+        <Image src="/welshare_logo.png" alt="Logo" width={200} height={200} />
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem></NavbarItem>

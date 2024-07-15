@@ -1,0 +1,65 @@
+"use client";
+
+import { Button } from "@nextui-org/button";
+import { Link } from "@nextui-org/link";
+import { useModal, useSIWE } from "connectkit";
+import { useAccount } from "wagmi";
+import PersonaFlow from "./PersonaFlow";
+export default function SignedInFlow() {
+  const { setOpen } = useModal();
+  const { isConnected } = useAccount();
+
+  const { data, isReady, isRejected, isLoading, isSignedIn, signOut, signIn } =
+    useSIWE();
+
+  return (
+    <>
+      {!isSignedIn && (
+        <>
+          <p className="text-2xl font-semibold">
+            Connect your wallet to get started
+          </p>
+          <Button
+            className="bg-gradient-to-br from-[#07F1EF] to-[#3045FF] px-8"
+            onClick={() => setOpen(true)}
+          >
+            Connect Wallet
+          </Button>
+        </>
+      )}
+      <p className="text-sm text-gray-400 w-1/2 text-center">
+        Note: Due to regulatory restrictions, the WEL token will{" "}
+        <strong>not be made available to US persons</strong>.
+      </p>
+      {isSignedIn && (
+        <div className="flex flex-col items-start gap-8 text-sm">
+          <p>INSTRUCTIONS:</p>
+          <p>
+            1. Go to{" "}
+            <Link href="https://www.juicebox.money/welshare" target="_blank">
+              www.juicebox.money/welshare
+            </Link>{" "}
+            to purchase your desired amount of vouchers. Note: These are not the
+            WEL token. The WEL token will be distributed to people who
+            successfully complete registration and are accepted to participate
+            in the whitelist pre-sale.
+          </p>
+          <p>
+            2. Follow the KYC process. You will need your ID and will be
+            required to take a selfie.
+          </p>
+          <p>
+            Upon completion of these steps, your WEL token purchase application
+            will be reviewed. If successful, you will receive the WEL token
+            after TGE (20% at TGE, 1-month cliff, then 6-month linear vesting).
+            If unsuccessful, you can return the voucher on juicebox for a
+            refund.
+          </p>
+          <div className="self-center">
+            <PersonaFlow />
+          </div>
+        </div>
+      )}
+    </>
+  );
+}

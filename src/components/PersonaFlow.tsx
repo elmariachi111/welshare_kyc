@@ -26,5 +26,12 @@ export default function PersonaFlow() {
     });
   }, [data]);
 
-  return <Button onClick={() => client.current?.open()}>Start Persona</Button>;
+  return (
+    <Button
+      className="bg-gradient-to-br from-[#07F1EF] to-[#3045FF] px-8"
+      onClick={() => client.current?.open()}
+    >
+      Start KYC Process
+    </Button>
+  );
 }
