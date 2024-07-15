@@ -5,9 +5,8 @@ import { NextUIProvider } from "@nextui-org/react";
 
 import { siweClient } from "@/utils/siweClient";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ConnectKitProvider, SIWESession } from "connectkit";
+import { ConnectKitProvider } from "connectkit";
 import { WagmiProvider } from "wagmi";
-import { EthAvatar } from "@/components/EthAvatar";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   // const config = getDefaultConfig({
