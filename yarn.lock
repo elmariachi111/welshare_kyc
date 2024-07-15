@@ -6745,6 +6745,13 @@ pathe@^1.1.1, pathe@^1.1.2:
   resolved "https://registry.yarnpkg.com/pathe/-/pathe-1.1.2.tgz#6c4cb47a945692e48a1ddd6e4094d170516437ec"
   integrity sha512-whLdWMYL2TwI08hn8/ZqAbrVemu0LNaNNJZX73O6qaIdCTfXutsLhMkjdENX0qhsQ9uIimo4/aQOmXkoon2nDQ==
 
+persona-react@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/persona-react/-/persona-react-5.1.0.tgz#a532a321ea08c37c633c3ae148c6489958dd33da"
+  integrity sha512-xYNAVqLsoRrxqrHroxzK5ODL2kDb5hhBpab2kz3dTqHKMJGT/tuQg8EEVuv4268YG8s6ReffqfE2v8zLMKqzAQ==
+  dependencies:
+    persona "^5.1.0"
+
 persona@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/persona/-/persona-5.1.0.tgz#e12aee79e0dbfef1db5a001f4df3d6685d2a3117"

@@ -11,24 +11,16 @@ const CustomSIWEButton = () => {
 
   const { data, isReady, isRejected, isLoading, isSignedIn, signOut, signIn } =
     useSIWE({
-      onSignIn: (session?: SIWESession) => {
-        // Do something with the data
-      },
-      onSignOut: () => {
-        // Do something when signed out
-      },
+      onSignIn: (session?: SIWESession) => {},
+      onSignOut: () => {},
     });
 
   const handleSignIn = async () => {
-    await signIn()?.then((session?: SIWESession) => {
-      // Do something when signed in
-    });
+    await signIn()?.then((session?: SIWESession) => {});
   };
 
   const handleSignOut = async () => {
-    await signOut()?.then(() => {
-      // Do something when signed out
-    });
+    await signOut()?.then(() => {});
   };
 
   if (isSignedIn && data) {
