@@ -5,12 +5,27 @@ import { Link } from "@nextui-org/link";
 import { useModal, useSIWE } from "connectkit";
 import { useAccount } from "wagmi";
 import PersonaFlow from "./PersonaFlow";
+import { useEffect, useState } from "react";
+import { CheckCircle } from "@phosphor-icons/react";
 export default function SignedInFlow() {
   const { setOpen } = useModal();
-  const { isConnected } = useAccount();
+  const [kycState, setKycState] = useState<"failed" | "completed">();
 
+  const { isConnected } = useAccount();
   const { data, isReady, isRejected, isLoading, isSignedIn, signOut, signIn } =
     useSIWE();
+
+  if (kycState === "completed") {
+    return (
+      <div className="flex flex-col items-center gap-4">
+        <CheckCircle fill="#07F1EF" size={128} weight="fill" />
+        <p className="w-1/2 text-center text-lg">
+          Thank you for identifying! We received your information and will let
+          you know how to proceed soon!
+        </p>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -56,7 +71,12 @@ export default function SignedInFlow() {
             refund.
           </p>
           <div className="self-center">
-            <PersonaFlow />
+            <PersonaFlow
+              onComplete={(inquiryId: string, status: string, fields: any) => {
+                setKycState("completed");
+                //console.log("COMPLETE: ", { inquiryId, status, fields });
+              }}
+            />
           </div>
         </div>
       )}

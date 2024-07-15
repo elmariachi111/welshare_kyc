@@ -4,9 +4,18 @@ import { useSIWE } from "connectkit";
 import { Client, setupIframe } from "persona";
 import { useEffect, useState, useRef } from "react";
 
-export default function PersonaFlow() {
-  const templateId = "itmpl_aCtu57jQGhPeMerAgE1zYZsHicch";
-  const environment = "sandbox";
+export default function PersonaFlow({
+  onComplete,
+  onCancel,
+}: {
+  onComplete?: (inquiryId: string, status: string, fields: any) => void;
+  onCancel?: (inquiryId?: string, sessionToken?: string) => void;
+}) {
+  const templateId = process.env.NEXT_PUBLIC_PERSONA_TEMPLATE;
+  const environment = process.env.NEXT_PUBLIC_PERSONA_ENVIRONMENT as
+    | "sandbox"
+    | "production";
+
   const { data, isSignedIn } = useSIWE();
   let client = useRef<Client | null>(null);
 
@@ -21,10 +30,21 @@ export default function PersonaFlow() {
         console.log("READY");
         client.current = _client;
       },
+      onComplete({ inquiryId, status, fields }) {
+        if (onComplete) {
+          onComplete(inquiryId, status, fields);
+        }
+        console.log("COMPLETE");
+      },
+      onCancel({ inquiryId, sessionToken }) {
+        if (onCancel) {
+          onCancel(inquiryId, sessionToken);
+        }
+      },
       onError: (error) => console.error(error),
       fields: { crypto_wallet_address: data.address },
     });
-  }, [data]);
+  }, [data, onComplete, onCancel]);
 
   return (
     <Button
