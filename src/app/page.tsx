@@ -1,6 +1,4 @@
-import PersonaFlow from "@/components/PersonaFlow";
 import SignedInFlow from "@/components/SignedInFlow";
-import SignoutButton from "@/components/SignoutButton";
 
 export default function Home() {
   return (

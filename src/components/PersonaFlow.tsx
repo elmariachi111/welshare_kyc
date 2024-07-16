@@ -1,13 +1,15 @@
 "use client";
 import { Button } from "@nextui-org/button";
 import { useSIWE } from "connectkit";
-import { Client, setupIframe } from "persona";
-import { useEffect, useState, useRef } from "react";
+import { Client } from "persona";
+import { useEffect, useRef } from "react";
 
 export default function PersonaFlow({
+  referrer,
   onComplete,
   onCancel,
 }: {
+  referrer: string | null;
   onComplete?: (inquiryId: string, status: string, fields: any) => void;
   onCancel?: (inquiryId?: string, sessionToken?: string) => void;
 }) {
@@ -42,9 +44,9 @@ export default function PersonaFlow({
         }
       },
       onError: (error) => console.error(error),
-      fields: { crypto_wallet_address: data.address },
+      fields: { crypto_wallet_address: data.address, referrer: referrer || "" },
     });
-  }, [data, onComplete, onCancel]);
+  }, [data, onComplete, onCancel, templateId, environment, referrer]);
 
   return (
     <Button

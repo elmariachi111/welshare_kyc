@@ -2,12 +2,17 @@
 
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
+import { CheckCircle } from "@phosphor-icons/react";
 import { useModal, useSIWE } from "connectkit";
+import { useState } from "react";
 import { useAccount } from "wagmi";
 import PersonaFlow from "./PersonaFlow";
-import { useEffect, useState } from "react";
-import { CheckCircle } from "@phosphor-icons/react";
+import { useSearchParams } from "next/navigation";
+
 export default function SignedInFlow() {
+  const searchParam = useSearchParams();
+  const referrer = searchParam.get("ref");
+
   const { setOpen } = useModal();
   const [kycState, setKycState] = useState<"failed" | "completed">();
 
@@ -72,6 +77,7 @@ export default function SignedInFlow() {
           </p>
           <div className="self-center">
             <PersonaFlow
+              referrer={referrer}
               onComplete={(inquiryId: string, status: string, fields: any) => {
                 setKycState("completed");
                 //console.log("COMPLETE: ", { inquiryId, status, fields });
