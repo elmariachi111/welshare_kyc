@@ -54,7 +54,8 @@ export default function PersonaFlow({
   return (
     <Suspense>
       <Button
-        className="bg-gradient-to-br from-[#07F1EF] to-[#3045FF] px-8"
+        radius="sm"
+        className="bg-gradient-to-br from-[#07F1EF] to-[#3045FF] px-12"
         onClick={() => client.current?.open()}
       >
         Start KYC Process

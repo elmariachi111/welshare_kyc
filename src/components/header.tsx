@@ -1,29 +1,16 @@
 "use client";
 
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-} from "@nextui-org/navbar";
-
-import CustomSIWEButton from "./CustomSiweButton";
 import Image from "next/image";
+import welshareLogo from "../../public/welshare_logo.png";
+import CustomSIWEButton from "./CustomSiweButton";
 
 export default function Header() {
   return (
-    <Navbar>
-      <NavbarBrand>
-        <Image src="/welshare_logo.png" alt="Logo" width={200} height={200} />
-      </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem></NavbarItem>
-      </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem>
-          <CustomSIWEButton />
-        </NavbarItem>
-      </NavbarContent>
-    </Navbar>
+    <div className="flex flex-row justify-between mt-8 mb-20 gap-4 items-center">
+      <div className="w-40">
+        <Image src={welshareLogo} alt="Logo" />
+      </div>
+      <CustomSIWEButton />
+    </div>
   );
 }

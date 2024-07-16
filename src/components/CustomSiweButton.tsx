@@ -32,6 +32,7 @@ const CustomSIWEButton = () => {
         <div className="flex flex-row items-center">
           <p className="text-sm">{truncateEthAddress(data.address)}</p>
           <Button
+            radius="sm"
             isIconOnly
             color="primary"
             aria-label="Sign out"
@@ -54,6 +55,7 @@ const CustomSIWEButton = () => {
   if (isConnected) {
     return (
       <Button
+        radius="sm"
         onClick={handleSignIn}
         disabled={isLoading}
         className="bg-gradient-to-br from-[#07F1EF] to-[#3045FF] px-8"
@@ -70,6 +72,7 @@ const CustomSIWEButton = () => {
 
   return (
     <Button
+      radius="sm"
       className="bg-gradient-to-br from-[#07F1EF] to-[#3045FF] px-8"
       onClick={() => setOpen(true)}
     >

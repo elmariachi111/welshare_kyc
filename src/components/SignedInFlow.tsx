@@ -5,16 +5,13 @@ import { Link } from "@nextui-org/link";
 import { CheckCircle } from "@phosphor-icons/react";
 import { useModal, useSIWE } from "connectkit";
 import { useState } from "react";
-import { useAccount } from "wagmi";
 import PersonaFlow from "./PersonaFlow";
 
 export default function SignedInFlow() {
   const { setOpen } = useModal();
   const [kycState, setKycState] = useState<"failed" | "completed">();
 
-  const { isConnected } = useAccount();
-  const { data, isReady, isRejected, isLoading, isSignedIn, signOut, signIn } =
-    useSIWE();
+  const { isSignedIn } = useSIWE();
 
   if (kycState === "completed") {
     return (
@@ -32,10 +29,11 @@ export default function SignedInFlow() {
     <>
       {!isSignedIn && (
         <>
-          <p className="text-2xl font-semibold">
+          <p className="text-2xl font-semibold text-center">
             Connect your wallet to get started
           </p>
           <Button
+            radius="sm"
             className="bg-gradient-to-br from-[#07F1EF] to-[#3045FF] px-8"
             onClick={() => setOpen(true)}
           >
@@ -43,7 +41,7 @@ export default function SignedInFlow() {
           </Button>
         </>
       )}
-      <p className="text-sm text-gray-400 w-1/2 text-center">
+      <p className="text-sm text-gray-400 md:w-1/2 text-center">
         Note: Due to regulatory restrictions, the WEL token will{" "}
         <strong>not be made available to US persons</strong>.
       </p>

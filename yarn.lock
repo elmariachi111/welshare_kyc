@@ -1675,7 +1675,7 @@
     "@react-aria/focus" "3.17.1"
     "@react-aria/utils" "3.24.1"
 
-"@nextui-org/spacer@2.0.29":
+"@nextui-org/spacer@2.0.29", "@nextui-org/spacer@^2.0.29":
   version "2.0.29"
   resolved "https://registry.yarnpkg.com/@nextui-org/spacer/-/spacer-2.0.29.tgz#2cce8bc0e69a87a91e8ee320df407fe989129e3c"
   integrity sha512-lcgzHIvTXXllnM6MMjti0ub8jEx9jmtzdd5+zgFAHLTeDS3pDffNZndmU+RkzpyGSyK20PCrMkV/sB4SCDN1KA==

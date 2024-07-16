@@ -23,10 +23,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={clsx("dark", inter.className)}>
       <body>
-        <Providers>
-          <Header />
-          {children}
-        </Providers>
+        <main className="flex min-h-screen flex-col p-2">
+          <div className="container mx-auto max-w-screen-md">
+            <Providers>
+              <Header />
+              {children}
+            </Providers>
+          </div>
+        </main>
       </body>
     </html>
   );
