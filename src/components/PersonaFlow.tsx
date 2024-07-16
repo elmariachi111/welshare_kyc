@@ -1,23 +1,23 @@
 "use client";
 import { Button } from "@nextui-org/button";
 import { useSIWE } from "connectkit";
-import { useSearchParams } from "next/navigation";
 import { Client } from "persona";
 import { Suspense, useEffect, useRef } from "react";
 
 export default function PersonaFlow({
   onComplete,
   onCancel,
+  referrer,
 }: {
   onComplete?: (inquiryId: string, status: string, fields: any) => void;
   onCancel?: (inquiryId?: string, sessionToken?: string) => void;
+  referrer?: string | null;
 }) {
   const templateId = process.env.NEXT_PUBLIC_PERSONA_TEMPLATE;
   const environment = process.env.NEXT_PUBLIC_PERSONA_ENVIRONMENT as
     | "sandbox"
     | "production";
 
-  const searchParam = useSearchParams();
   const { data, isSignedIn } = useSIWE();
   let client = useRef<Client | null>(null);
 
@@ -46,10 +46,10 @@ export default function PersonaFlow({
       onError: (error) => console.error(error),
       fields: {
         crypto_wallet_address: data.address,
-        referrer: searchParam.get("ref") || "",
+        referrer: referrer || "",
       },
     });
-  }, [data, onComplete, onCancel, templateId, environment, searchParam]);
+  }, [data, onComplete, onCancel, templateId, environment, referrer]);
 
   return (
     <Suspense>

@@ -7,7 +7,11 @@ import { useModal, useSIWE } from "connectkit";
 import { useState } from "react";
 import PersonaFlow from "./PersonaFlow";
 
-export default function SignedInFlow() {
+export default function SignedInFlow({
+  referrer,
+}: {
+  referrer?: string | null;
+}) {
   const { setOpen } = useModal();
   const [kycState, setKycState] = useState<"failed" | "completed">();
 
@@ -71,6 +75,7 @@ export default function SignedInFlow() {
           </p>
           <div className="self-center">
             <PersonaFlow
+              referrer={referrer}
               onComplete={(inquiryId: string, status: string, fields: any) => {
                 setKycState("completed");
                 //console.log("COMPLETE: ", { inquiryId, status, fields });
