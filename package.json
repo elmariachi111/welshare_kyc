@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@googleapis/sheets": "^9.0.0",
     "@nextui-org/avatar": "^2.0.30",
     "@nextui-org/badge": "^2.0.29",
     "@nextui-org/button": "^2.0.34",

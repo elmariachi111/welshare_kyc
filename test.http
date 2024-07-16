@@ -1,0 +1,34 @@
+POST http://localhost:3000/api/verify
+Content-Type: application/json
+
+{
+  "message": "foo",
+  "signature": "0x0"
+}
+
+###
+
+GET http://localhost:3000/api/siwe/nonce
+
+###
+
+POST {{$dotenv AIRTABLE_ENDPOINT_URL}}
+Authorization: Bearer {{$dotenv AIRTABLE_TOKEN}}
+Content-Type: application/json
+
+{
+    "fields": {
+      "InquiryId": "inq_abcde",
+      "CryptoWallet": "0xabcd",
+      "Country": "DE",
+      "EMail": "moo@loo.boo",
+      "Referrer": "foo"
+    }
+  }
+
+###
+
+POST http://localhost:3000/api/webhook
+Content-Type: application/json
+
+< samples/persona.json
