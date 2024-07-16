@@ -1,15 +1,14 @@
 "use client";
 import { Button } from "@nextui-org/button";
 import { useSIWE } from "connectkit";
+import { useSearchParams } from "next/navigation";
 import { Client } from "persona";
-import { useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 
 export default function PersonaFlow({
-  referrer,
   onComplete,
   onCancel,
 }: {
-  referrer: string | null;
   onComplete?: (inquiryId: string, status: string, fields: any) => void;
   onCancel?: (inquiryId?: string, sessionToken?: string) => void;
 }) {
@@ -18,6 +17,7 @@ export default function PersonaFlow({
     | "sandbox"
     | "production";
 
+  const searchParam = useSearchParams();
   const { data, isSignedIn } = useSIWE();
   let client = useRef<Client | null>(null);
 
@@ -44,16 +44,21 @@ export default function PersonaFlow({
         }
       },
       onError: (error) => console.error(error),
-      fields: { crypto_wallet_address: data.address, referrer: referrer || "" },
+      fields: {
+        crypto_wallet_address: data.address,
+        referrer: searchParam.get("ref") || "",
+      },
     });
-  }, [data, onComplete, onCancel, templateId, environment, referrer]);
+  }, [data, onComplete, onCancel, templateId, environment, searchParam]);
 
   return (
-    <Button
-      className="bg-gradient-to-br from-[#07F1EF] to-[#3045FF] px-8"
-      onClick={() => client.current?.open()}
-    >
-      Start KYC Process
-    </Button>
+    <Suspense>
+      <Button
+        className="bg-gradient-to-br from-[#07F1EF] to-[#3045FF] px-8"
+        onClick={() => client.current?.open()}
+      >
+        Start KYC Process
+      </Button>
+    </Suspense>
   );
 }
