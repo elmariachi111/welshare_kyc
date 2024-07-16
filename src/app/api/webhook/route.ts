@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import * as Google from "@googleapis/sheets";
 import { createHmac, timingSafeEqual } from "node:crypto";
+import { isSanctioned } from "@/lib/chainalysis";
 
 const makeClient = () => {
   const auth = new Google.auth.JWT({
@@ -50,6 +51,7 @@ export const POST = async (req: NextRequest) => {
     EMail: payload.attributes.fields.emailAddress.value,
     Referrer: payload.attributes.fields.referrer.value,
   };
+  const sanctionResult = await isSanctioned(submission.CryptoWallet);
 
   const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
 
@@ -67,6 +69,7 @@ export const POST = async (req: NextRequest) => {
           submission.SelectedCountry,
           submission.EMail,
           submission.Referrer,
+          sanctionResult.isSanctioned ? "Yes" : "No",
           new Date().toUTCString(),
         ],
       ],

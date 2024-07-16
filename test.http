@@ -12,6 +12,10 @@ GET http://localhost:3000/api/siwe/nonce
 
 ###
 
+GET http://localhost:3000/api/sanctions?address=0x76D85B4C0Fc497EeCc38902397aC608000A06607
+
+###
+
 POST {{$dotenv AIRTABLE_ENDPOINT_URL}}
 Authorization: Bearer {{$dotenv AIRTABLE_TOKEN}}
 Content-Type: application/json
