@@ -77,8 +77,8 @@ export default function SignedInFlow({
             <PersonaFlow
               referrer={referrer}
               onComplete={(inquiryId: string, status: string, fields: any) => {
+                console.log("PERSONA", { inquiryId, status, fields });
                 setKycState("completed");
-                //console.log("COMPLETE: ", { inquiryId, status, fields });
               }}
             />
           </div>

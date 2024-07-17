@@ -1,5 +1,4 @@
 import SignedInFlow from "@/components/SignedInFlow";
-import { Spacer } from "@nextui-org/react";
 import { cookies } from "next/headers";
 
 export default function Home() {

@@ -2,7 +2,7 @@
 import { Button } from "@nextui-org/button";
 import { useSIWE } from "connectkit";
 import { Client } from "persona";
-import { Suspense, useEffect, useRef } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 
 export default function PersonaFlow({
   onComplete,
@@ -19,18 +19,15 @@ export default function PersonaFlow({
     | "production";
 
   const { data, isSignedIn } = useSIWE();
-  let client = useRef<Client | null>(null);
 
-  useEffect(() => {
-    if (!data) return;
-
-    console.log("new client");
-    const _client = new Client({
+  const startKycFlow = () => {
+    const client = new Client({
       templateId,
       environment,
       onReady: () => {
         console.log("READY");
-        client.current = _client;
+
+        client.open();
       },
       onComplete({ inquiryId, status, fields }) {
         if (onComplete) {
@@ -49,14 +46,14 @@ export default function PersonaFlow({
         referrer: referrer || "",
       },
     });
-  }, [data, onComplete, onCancel, templateId, environment, referrer]);
+  };
 
   return (
     <Suspense>
       <Button
         radius="sm"
         className="bg-gradient-to-br from-[#07F1EF] to-[#3045FF] px-12"
-        onClick={() => client.current?.open()}
+        onClick={() => startKycFlow()}
       >
         Start KYC Process
       </Button>

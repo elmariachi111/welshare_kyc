@@ -29,8 +29,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
           <siweClient.Provider
             enabled={true} // defaults true
             onSignIn={console.debug}
-            nonceRefetchInterval={60 * 1000}
-            sessionRefetchInterval={60 * 1000}
+            nonceRefetchInterval={15 * 60 * 1000}
+            sessionRefetchInterval={15 * 60 * 1000}
           >
             <ConnectKitProvider
               theme="midnight"
