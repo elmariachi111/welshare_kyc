@@ -13,9 +13,9 @@ export default function SignedInActions({
   referrer?: string | null;
 }) {
   return (
-    <div className="flex flex-col items-start gap-8 text-sm">
+    <div className="flex flex-col items-start gap-12 text-sm">
       <div className="flex flex-col md:flex-row bg-zinc-800 p-8 rounded-2xl gap-6 items-center">
-        <div className="md:ml-[-4rem]">
+        <div className="mt-[-4rem] md:ml-[-4rem] md:mt-0">
           <div className="w-16 h-16 rounded-full flex justify-center items-center bg-primary text-2xl text-black">
             1
           </div>
@@ -43,8 +43,8 @@ export default function SignedInActions({
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row bg-zinc-800 p-8 rounded-2xl gap-6 items-center">
-        <div className="md:ml-[-4rem]">
+      <div className="flex flex-col md:flex-row bg-zinc-800 p-8 rounded-2xl gap-6 items-center w-full">
+        <div className="mt-[-4rem] md:ml-[-4rem] md:mt-0">
           <div className="w-16 h-16 rounded-full flex justify-center items-center bg-primary text-2xl text-black">
             2
           </div>
