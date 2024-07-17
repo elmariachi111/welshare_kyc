@@ -2,7 +2,7 @@
 
 import { Button } from "@nextui-org/button";
 
-import { CheckCircle } from "@phosphor-icons/react";
+import { CheckCircle, XCircle } from "@phosphor-icons/react";
 import { useModal, useSIWE } from "connectkit";
 import { useState } from "react";
 import SignedInActions from "./SignedinActions";
@@ -24,6 +24,18 @@ export default function SignedInFlow({
         <p className="w-1/2 text-center text-lg">
           Thank you for identifying! We received your information and will let
           you know how to proceed soon!
+        </p>
+      </div>
+    );
+  }
+
+  if (kycState === "failed") {
+    return (
+      <div className="flex flex-col items-center gap-4">
+        <XCircle fill="#ff1900" size={128} weight="fill" />
+        <p className="w-1/2 text-center text-lg">
+          You unfortunately did not pass the KYC process. If you provided an
+          email address, we&apos;ll get back to you.
         </p>
       </div>
     );

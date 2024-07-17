@@ -33,8 +33,9 @@ export default function PersonaFlow({
         if (onComplete) {
           onComplete(inquiryId, status, fields);
         }
-        console.log("COMPLETE");
+        console.log("FLOW COMPLETE", inquiryId, status, fields);
       },
+
       onCancel({ inquiryId, sessionToken }) {
         if (onCancel) {
           onCancel(inquiryId, sessionToken);

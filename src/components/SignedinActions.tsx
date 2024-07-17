@@ -62,7 +62,7 @@ export default function SignedInActions({
             referrer={referrer}
             onComplete={(inquiryId: string, status: string, fields: any) => {
               console.log("PERSONA", { inquiryId, status, fields });
-              setKYCState("completed");
+              setKYCState(status as "completed" | "failed");
             }}
           />
         </div>

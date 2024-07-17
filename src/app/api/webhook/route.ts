@@ -50,6 +50,7 @@ export const POST = async (req: NextRequest) => {
     AddressCountry: payload.attributes.fields.addressCountryCode.value,
     EMail: payload.attributes.fields.emailAddress.value,
     Referrer: payload.attributes.fields.referrer.value,
+    Status: payload.attributes.status,
   };
   const sanctionResult = await isSanctioned(submission.CryptoWallet);
 
@@ -69,6 +70,7 @@ export const POST = async (req: NextRequest) => {
           submission.SelectedCountry,
           submission.EMail,
           submission.Referrer,
+          submission.Status,
           sanctionResult.isSanctioned ? "Yes" : "No",
           new Date().toUTCString(),
         ],
