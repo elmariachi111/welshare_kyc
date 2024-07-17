@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Providers } from "./providers";
 import Header from "@/components/header";
+import { Spacer } from "@nextui-org/spacer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -21,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={clsx("dark", inter.className)}>
-      <title>Welshare Presale Phase I</title>
+    <html lang="en" className="dark">
+      <title>Welshare Presale Phase 1</title>
       <link
         rel="apple-touch-icon"
         sizes="180x180"
@@ -46,7 +47,11 @@ export default function RootLayout({
           <div className="container mx-auto max-w-screen-md">
             <Providers>
               <Header />
+              <h1 className="text-center mb-6 text-3xl md:text-5xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#2DE1FB] to-[#086BFA]">
+                Public Pre-sale Phase 1
+              </h1>
               {children}
+              <Spacer y={12} />
             </Providers>
           </div>
         </main>

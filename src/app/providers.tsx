@@ -29,8 +29,15 @@ export function Providers({ children }: { children: React.ReactNode }) {
           <siweClient.Provider
             enabled={true} // defaults true
             onSignIn={console.debug}
+            nonceRefetchInterval={60 * 1000}
+            sessionRefetchInterval={60 * 1000}
           >
-            <ConnectKitProvider theme="midnight">{children}</ConnectKitProvider>
+            <ConnectKitProvider
+              theme="midnight"
+              options={{ walletConnectName: "WalletConnect" }}
+            >
+              {children}
+            </ConnectKitProvider>
           </siweClient.Provider>
         </QueryClientProvider>
       </WagmiProvider>
