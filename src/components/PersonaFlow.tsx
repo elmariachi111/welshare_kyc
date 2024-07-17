@@ -55,7 +55,7 @@ export default function PersonaFlow({
         className="bg-gradient-to-br from-[#07F1EF] to-[#3045FF] px-12"
         onClick={() => startKycFlow()}
       >
-        Start KYC Process
+        Apply For WEL Token
       </Button>
     </Suspense>
   );

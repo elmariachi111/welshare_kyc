@@ -1,11 +1,11 @@
 "use client";
 
 import { Button } from "@nextui-org/button";
-import { Link } from "@nextui-org/link";
+
 import { CheckCircle } from "@phosphor-icons/react";
 import { useModal, useSIWE } from "connectkit";
 import { useState } from "react";
-import PersonaFlow from "./PersonaFlow";
+import SignedInActions from "./SignedinActions";
 
 export default function SignedInFlow({
   referrer,
@@ -13,7 +13,7 @@ export default function SignedInFlow({
   referrer?: string | null;
 }) {
   const { setOpen } = useModal();
-  const [kycState, setKycState] = useState<"failed" | "completed">();
+  const [kycState, setKYCState] = useState<"failed" | "completed">();
 
   const { isSignedIn } = useSIWE();
 
@@ -50,39 +50,7 @@ export default function SignedInFlow({
         <strong>not be made available to US persons</strong>.
       </p>
       {isSignedIn && (
-        <div className="flex flex-col items-start gap-8 text-sm">
-          <p>INSTRUCTIONS:</p>
-          <p>
-            1. Go to{" "}
-            <Link href="https://www.juicebox.money/welshare" target="_blank">
-              www.juicebox.money/welshare
-            </Link>{" "}
-            to purchase your desired amount of vouchers. Note: These are not the
-            WEL token. The WEL token will be distributed to people who
-            successfully complete registration and are accepted to participate
-            in the whitelist pre-sale.
-          </p>
-          <p>
-            2. Follow the KYC process. You will need your ID and will be
-            required to take a selfie.
-          </p>
-          <p>
-            Upon completion of these steps, your WEL token purchase application
-            will be reviewed. If successful, you will receive the WEL token
-            after TGE (20% at TGE, 1-month cliff, then 6-month linear vesting).
-            If unsuccessful, you can return the voucher on juicebox for a
-            refund.
-          </p>
-          <div className="self-center">
-            <PersonaFlow
-              referrer={referrer}
-              onComplete={(inquiryId: string, status: string, fields: any) => {
-                console.log("PERSONA", { inquiryId, status, fields });
-                setKycState("completed");
-              }}
-            />
-          </div>
-        </div>
+        <SignedInActions setKYCState={setKYCState} referrer={referrer} />
       )}
     </>
   );
