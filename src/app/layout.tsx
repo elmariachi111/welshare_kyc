@@ -23,7 +23,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <title>Welshare Presale Phase 1</title>
       <link
         rel="apple-touch-icon"
         sizes="180x180"

@@ -33,8 +33,8 @@ export default function SignedInActions({
                   Important: Use this connected wallet for purchase.
                 </strong>{" "}
                 Go to{" "}
-                <Link href="https://www.juicebox.money/@welshare" isExternal>
-                  www.juicebox.money/@welshare
+                <Link href="https://juicebox.money/@welshare" isExternal>
+                  juicebox.money/@welshare
                 </Link>{" "}
                 to purchase your desired amount of vouchers. Note: These are not
                 the WEL tokens. The WEL tokens will be distributed to people who
@@ -47,7 +47,7 @@ export default function SignedInActions({
                 size="lg"
                 className="w-full bg-gradient-to-br from-[#07F1EF] to-[#3045FF] px-12"
                 as={Link}
-                href="https://www.juicebox.money/@welshare"
+                href="https://juicebox.money/@welshare"
                 isExternal
               >
                 Purchase Vouchers
