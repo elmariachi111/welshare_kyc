@@ -50,14 +50,12 @@ export default function PersonaFlow({
   };
 
   return (
-    <Suspense>
-      <Button
-        radius="sm"
-        className="bg-gradient-to-br from-[#07F1EF] to-[#3045FF] px-12"
-        onClick={() => startKycFlow()}
-      >
-        Apply For WEL Token
-      </Button>
-    </Suspense>
+    <Button
+      radius="sm"
+      className="w-full bg-gradient-to-br from-[#07F1EF] to-[#3045FF] px-12"
+      onClick={() => startKycFlow()}
+    >
+      Apply For WEL Token
+    </Button>
   );
 }

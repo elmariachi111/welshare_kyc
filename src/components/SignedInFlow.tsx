@@ -57,8 +57,9 @@ export default function SignedInFlow({
           </Button>
         </>
       )}
-      <p className="text-sm text-gray-400 md:w-1/2 text-center">
+      <p className="text-lg text-gray-400 sm:w-2/3 text-center ">
         Note: Due to regulatory restrictions, the WEL token will{" "}
+        <br className="hidden sm:inline" />
         <strong>not be made available to US persons</strong>.
       </p>
       {isSignedIn && (

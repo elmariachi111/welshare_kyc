@@ -44,11 +44,11 @@ export default function RootLayout({
       <link rel="manifest" href="/site.webmanifest" />
       <body>
         <main className="flex min-h-screen flex-col p-2">
-          <div className="container mx-auto max-w-screen-md">
+          <div className="container mx-auto max-w-screen-lg">
             <Providers>
               <Header />
-              <h1 className="text-center mb-6 text-3xl md:text-5xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-[#2DE1FB] to-[#086BFA]">
-                Public Pre-sale Phase 1
+              <h1 className="text-center mb-6 text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#2DE1FB] to-[#086BFA]">
+                Public Pre-Sale Phase 1
               </h1>
               {children}
               <Spacer y={12} />
