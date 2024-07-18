@@ -52,6 +52,7 @@ export default function PersonaFlow({
   return (
     <Button
       radius="sm"
+      size="lg"
       className="w-full bg-gradient-to-br from-[#07F1EF] to-[#3045FF] px-12"
       onClick={() => startKycFlow()}
     >
