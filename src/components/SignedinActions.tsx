@@ -2,10 +2,21 @@
 
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
-import { XCircle } from "@phosphor-icons/react";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import PersonaFlow from "./PersonaFlow";
+import { useAccount } from "wagmi";
+import { Address, formatEther } from "viem";
 
+type Participant = {
+  id: string;
+  projectId: number;
+  address: Address;
+  volume: bigint;
+  volumeUSD: bigint;
+  balance: bigint;
+  stakedBalance: bigint;
+  paymentsCount: number;
+};
 export default function SignedInActions({
   kycState,
   setKYCState,
@@ -15,10 +26,36 @@ export default function SignedInActions({
   setKYCState: Dispatch<SetStateAction<"completed" | "failed" | undefined>>;
   referrer?: string | null;
 }) {
+  const { address } = useAccount();
+  const [participant, setParticipant] = useState<Participant | null>();
+
+  useEffect(() => {
+    if (!address) return;
+    (async () => {
+      const res = await (
+        await fetch(`/api/jb?address=${address.toLowerCase()}`)
+      ).json();
+      if (res.data.participant) {
+        setParticipant({
+          id: res.data.participant.id,
+          projectId: res.data.participant.projectId,
+          address: res.data.participant.address,
+          balance: BigInt(res.data.participant.balance),
+          volume: BigInt(res.data.participant.volume),
+          volumeUSD: BigInt(res.data.participant.volumeUSD),
+          paymentsCount: res.data.participant.paymentsCount,
+          stakedBalance: BigInt(res.data.participant.stakedBalance),
+        });
+      } else {
+        setParticipant(null);
+      }
+    })();
+  }, [address]);
+
   return (
     <>
       <div className="flex flex-col items-start gap-12 text-sm pl-0 md:pl-12 mt-8 md:mt-0">
-        <div className="flex flex-col md:flex-row bg-zinc-800 p-6 rounded-2xl gap-8 items-center w-full">
+        <div className="flex flex-col md:flex-row bg-zinc-800 p-6 rounded-2xl gap-6 items-center w-full">
           <div className="mt-[-3.5rem] md:ml-[-3.5rem] md:mt-0">
             <div className="w-16 h-16 rounded-full flex justify-center items-center bg-primary text-2xl text-black">
               1
@@ -41,7 +78,7 @@ export default function SignedInActions({
                 are accepted to purchase. To apply, complete step 2.{" "}
               </p>
             </div>
-            <div className="flex md:w-1/4 ">
+            <div className="flex md:w-1/4 flex-col items-center gap-2">
               <Button
                 radius="sm"
                 size="lg"
@@ -52,20 +89,21 @@ export default function SignedInActions({
               >
                 Purchase Vouchers
               </Button>
+              {participant && <p>{formatEther(participant.balance)} welV</p>}
             </div>
           </div>
         </div>
 
         {kycState !== "completed" && (
           <>
-            <div className="flex flex-col md:flex-row bg-zinc-800 p-6 rounded-2xl gap-4 items-center w-full">
+            <div className="flex flex-col md:flex-row bg-zinc-800 p-6 rounded-2xl gap-6 items-center w-full">
               <div className="mt-[-3.5rem] md:ml-[-3.5rem] md:mt-0">
                 <div className="w-16 h-16 rounded-full flex justify-center items-center bg-primary text-2xl text-black">
                   2
                 </div>
               </div>
               <div className="flex flex-col md:flex-row w-full justify-stretch items-center gap-8">
-                <div className="flex flex-col flex-grow space-y-2 md:w-3/4 ">
+                <div className="flex flex-col space-y-2 md:w-3/4">
                   <p className="text-xl font-bold">Apply for WEL Token</p>
                   <p>
                     Follow the KYC process. You will need your ID and will be

@@ -36,3 +36,47 @@ POST http://localhost:3000/api/webhook
 Content-Type: application/json
 
 < samples/persona.json
+
+### Graphql
+
+POST 
+Host: subgraph.satsuma-prod.com
+Origin: https://juicebox.money
+
+query Participant($projectId: Int,$address: Bytes) {
+  participants(where: {projectId: $projectId,address: $address}) {
+    project {
+        id
+      }
+      projectId
+      address
+      volume
+      volumeUSD
+      balance
+      paymentsCount
+      stakedBalance
+  }
+}
+
+{
+  "projectId": 698,
+  "address": "0x0"
+}
+
+###
+
+POST 
+Content-Type: application/json
+Origin: https://juicebox.money
+
+{
+  "query": "query Participant($projectId: Int,$address: Bytes) {  participants(where: {projectId: $projectId,address: $address}) {    project {        id      }      projectId     address      volume  }}",
+  "variables": {
+    "projectId": 698,
+    "address": "0x"
+  }
+}
+
+###
+
+GET http://localhost:3000/api/jb/?address=
