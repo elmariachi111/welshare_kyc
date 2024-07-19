@@ -18,18 +18,25 @@ export default function PersonaFlow({
     | "sandbox"
     | "production";
 
+  const [isActive, setIsActive] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const { data, isSignedIn } = useSIWE();
 
   const startKycFlow = () => {
+    setIsActive(true);
+    setIsLoading(true);
     const client = new Client({
       templateId,
       environment,
       onReady: () => {
         console.log("READY");
-
+        setIsLoading(false);
         client.open();
       },
       onComplete({ inquiryId, status, fields }) {
+        setIsActive(false);
+        setIsLoading(false);
         if (onComplete) {
           onComplete(inquiryId, status, fields);
         }
@@ -37,11 +44,17 @@ export default function PersonaFlow({
       },
 
       onCancel({ inquiryId, sessionToken }) {
+        setIsActive(false);
+        setIsLoading(false);
         if (onCancel) {
           onCancel(inquiryId, sessionToken);
         }
       },
-      onError: (error) => console.error(error),
+      onError: (error) => {
+        setIsActive(false);
+        setIsLoading(false);
+        console.error(error);
+      },
       fields: {
         crypto_wallet_address: data.address,
         referrer: referrer || "",
@@ -53,6 +66,8 @@ export default function PersonaFlow({
     <Button
       radius="sm"
       size="lg"
+      isDisabled={isActive}
+      isLoading={isLoading}
       className="w-full bg-gradient-to-br from-[#07F1EF] to-[#3045FF] px-12"
       onClick={() => startKycFlow()}
     >

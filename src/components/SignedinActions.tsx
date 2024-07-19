@@ -17,6 +17,16 @@ type Participant = {
   stakedBalance: bigint;
   paymentsCount: number;
 };
+
+const formatCurrency = (value: bigint): string => {
+  const dec = parseFloat(formatEther(value));
+  return dec.toLocaleString("en-US", {
+    style: "decimal",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+};
+
 export default function SignedInActions({
   kycState,
   setKYCState,
@@ -51,6 +61,10 @@ export default function SignedInActions({
       }
     })();
   }, [address]);
+
+  const voucherAmount = participant
+    ? formatCurrency(participant.balance)
+    : undefined;
 
   return (
     <>
@@ -89,7 +103,7 @@ export default function SignedInActions({
               >
                 Purchase Vouchers
               </Button>
-              {participant && <p>{formatEther(participant.balance)} welV</p>}
+              {voucherAmount && <p>{voucherAmount} Vouchers</p>}
             </div>
           </div>
         </div>
