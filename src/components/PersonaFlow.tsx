@@ -1,8 +1,7 @@
 "use client";
 import { Button } from "@nextui-org/button";
 import { useSIWE } from "connectkit";
-import { Client } from "persona";
-import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { useState } from "react";
 
 export default function PersonaFlow({
   onComplete,
@@ -23,9 +22,10 @@ export default function PersonaFlow({
 
   const { data, isSignedIn } = useSIWE();
 
-  const startKycFlow = () => {
+  const startKycFlow = async () => {
     setIsActive(true);
     setIsLoading(true);
+    const Client = (await import("persona")).Client;
     const client = new Client({
       templateId,
       environment,
