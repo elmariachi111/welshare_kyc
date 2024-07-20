@@ -1,10 +1,10 @@
-import "./globals.css";
-import { clsx } from "clsx";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Providers } from "./providers";
 import Header from "@/components/header";
 import { Spacer } from "@nextui-org/spacer";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import Link from "next/link";
+import "./globals.css";
+import { Providers } from "./providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -42,16 +42,26 @@ export default function RootLayout({
       />
       <link rel="manifest" href="/site.webmanifest" />
       <body>
-        <main className="flex min-h-screen flex-col p-2">
-          <div className="container mx-auto max-w-screen-lg">
+        <main className="flex min-h-screen flex-col justify-between">
+          <div className="container mx-auto max-w-screen-lg p-2">
             <Providers>
               <Header />
               <h1 className="text-center mb-6 text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#2DE1FB] to-[#086BFA]">
                 Public Pre-Sale Phase 1
               </h1>
               {children}
-              <Spacer y={12} />
             </Providers>
+          </div>
+
+          <Spacer y={12} />
+          <div className="w-full bg-gray-900 text-gray-500 p-4">
+            <div className="container mx-auto max-w-screen-lg">
+              <div className="flex flex-row justify-end">
+                <Link href="/privacy-policy" className="hover:underline">
+                  Privacy Policy
+                </Link>
+              </div>
+            </div>
           </div>
         </main>
       </body>

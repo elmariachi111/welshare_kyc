@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@googleapis/sheets": "^9.0.0",
+    "@mdx-js/loader": "^3.0.1",
+    "@mdx-js/react": "^3.0.1",
+    "@next/mdx": "^14.2.5",
     "@nextui-org/avatar": "^2.0.30",
     "@nextui-org/badge": "^2.0.29",
     "@nextui-org/button": "^2.0.34",
@@ -21,6 +24,7 @@
     "@nextui-org/theme": "^2.2.6",
     "@phosphor-icons/react": "^2.1.7",
     "@tanstack/react-query": "^5.50.1",
+    "@types/mdx": "^2.0.13",
     "axios": "^1.7.2",
     "blo": "^1.2.0",
     "clsx": "^2.1.1",
@@ -39,6 +43,7 @@
     "wagmi": "^2.10.10"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.13",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
