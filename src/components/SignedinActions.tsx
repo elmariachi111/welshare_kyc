@@ -163,7 +163,7 @@ export default function SignedInActions({
             eligible for a refund. We will notify you soon.
           </p>
           <div className="text-center space-y-2">
-            <p>Follow us on Twitter and join our Discord to stay updated.</p>
+            <p>Follow us on Twitter and join our Telegram to stay updated.</p>
             <p>
               Twitter:{" "}
               <Link href="https://x.com/welsharehealth" isExternal>
@@ -171,9 +171,9 @@ export default function SignedInActions({
               </Link>
             </p>
             <p>
-              Discord:{" "}
-              <Link href="https://discord.com/invite/awQw66CUdP" isExternal>
-                https://discord.com/invite/awQw66CUdP
+              Telegram:{" "}
+              <Link href="https://t.me/welsharehealth" isExternal>
+                https://t.me/welsharehealth
               </Link>
             </p>
           </div>
