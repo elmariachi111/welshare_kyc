@@ -30,7 +30,7 @@ export default function PersonaFlow({
       templateId,
       environment,
       onReady: () => {
-        console.log("READY");
+        console.log("READY, ref:%s, wallet: %s ", referrer, data.address);
         setIsLoading(false);
         client.open();
       },
