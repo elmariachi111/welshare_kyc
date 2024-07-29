@@ -80,3 +80,7 @@ Origin: https://juicebox.money
 ###
 
 GET http://localhost:3000/api/jb/?address=
+
+###
+
+GET http://localhost:3000/api/status?address=

@@ -7,7 +7,11 @@ export default function SignoutButton() {
   if (!isSignedIn) return null;
 
   return (
-    <Button onClick={signOut} radius="sm">
+    <Button
+      radius="sm"
+      className="bg-gradient-to-br from-[#07F1EF] to-[#3045FF] px-8"
+      onClick={() => signOut()}
+    >
       Sign out
     </Button>
   );
