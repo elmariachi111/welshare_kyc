@@ -113,8 +113,7 @@ export default function SignedInActions({
                     juicebox.money/@welshare
                   </Link>
                   . Note: These are not the WEL tokens. The WEL tokens will be
-                  distributed to people who are accepted to purchase. To apply,
-                  complete the next step.
+                  distributed to users who were accepted to purchase.
                 </p>
               ) : (
                 <p>You have not purchased any vouchers.</p>

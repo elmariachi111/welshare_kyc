@@ -16,7 +16,8 @@ const makeClient = () => {
 export const GET = async (req: NextRequest) => {
   const address = req.nextUrl.searchParams.get("address");
 
-  const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
+  const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_WALLETS_SPREADSHEET_ID;
+
   const Sheets = makeClient();
 
   const result = await Sheets.spreadsheets.values.get({
