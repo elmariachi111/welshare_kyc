@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     default: "Welshare Presale Phase 1",
     template: "%s | Welshare Presale Phase 1",
   },
-  description: "Apply for the $WEL Token now - Welshare Presale Phase 1",
+  description: "Apply for the $WEL Token now - Welshare Presale Phase 2",
   publisher: "Welshare Health UG",
   authors: [
     {
@@ -58,7 +58,7 @@ export default function RootLayout({
             <Providers>
               <Header />
               <h1 className="text-center mb-6 text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#2DE1FB] to-[#086BFA]">
-                Public Pre-Sale Phase 1
+                Public Pre-Sale Phase 2
               </h1>
               {children}
               <Analytics />
