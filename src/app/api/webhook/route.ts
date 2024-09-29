@@ -59,7 +59,7 @@ export const POST = async (req: NextRequest) => {
   const Sheets = makeClient();
   const result = await Sheets.spreadsheets.values.append({
     spreadsheetId: SPREADSHEET_ID,
-    range: "Persona!A2:F",
+    range: "Persona!A2:H",
     valueInputOption: "USER_ENTERED",
     requestBody: {
       values: [

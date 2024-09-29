@@ -15,6 +15,9 @@ const makeClient = () => {
 
 export const GET = async (req: NextRequest) => {
   const address = req.nextUrl.searchParams.get("address");
+  if (!address) {
+    return NextResponse.json({ error: "address is required" }, { status: 400 });
+  }
 
   const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_WALLETS_SPREADSHEET_ID;
 
@@ -22,11 +25,11 @@ export const GET = async (req: NextRequest) => {
 
   const result = await Sheets.spreadsheets.values.get({
     spreadsheetId: SPREADSHEET_ID,
-    range: "Sheet1!A:B",
+    range: "Sheet1!A2:C1250",
   });
 
   const entry = result.data.values?.find(
-    (val: any[2]) => val[0].toLowerCase() === address
+    (val: any[3]) => val[0].toLowerCase() === address.toLowerCase()
   );
 
   if (!entry) {
@@ -36,6 +39,7 @@ export const GET = async (req: NextRequest) => {
   const response = NextResponse.json({
     address: entry?.[0],
     status: entry?.[1],
+    final_approval: entry?.[2],
   });
   return response;
 };
