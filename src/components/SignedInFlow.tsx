@@ -13,7 +13,7 @@ export default function SignedInFlow({
 }) {
   const { setOpen } = useModal();
   const [kycState, setKYCState] = useState<
-    "failed" | "completed" | "not-found" | "not-started" | undefined
+    "failed" | "completed" | "not-started" | "not-finalized" | undefined
   >();
 
   const { isSignedIn } = useSIWE();

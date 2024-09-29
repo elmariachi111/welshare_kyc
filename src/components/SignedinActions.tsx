@@ -31,10 +31,10 @@ export default function SignedInActions({
   setKYCState,
   referrer,
 }: {
-  kycState?: "failed" | "completed" | "not-found" | "not-started";
+  kycState?: "failed" | "completed" | "not-started" | "not-finalized";
   setKYCState: Dispatch<
     SetStateAction<
-      "completed" | "failed" | "not-found" | "not-started" | undefined
+      "completed" | "failed" | "not-started" | "not-finalized" | undefined
     >
   >;
   referrer?: string | null;
@@ -72,14 +72,31 @@ export default function SignedInActions({
         `/api/status?address=${address.toLowerCase()}`
       );
       if (fetchRes.status === 404) {
-        setKYCState("not-found");
+        setKYCState("not-started");
         return;
       }
+
       const res = await fetchRes.json();
+
       if (res.status === "N") {
+        //seems unused
         setKYCState("not-started");
-      } else {
-        setKYCState(res.status);
+        return;
+      }
+
+      if (!res.final_approval) {
+        setKYCState("not-finalized");
+        return;
+      }
+
+      if (res.final_approval === "approved") {
+        setKYCState("completed");
+        return;
+      }
+
+      if (res.final_approval === "not approved") {
+        setKYCState("failed");
+        return;
       }
     })();
   }, [address]);
@@ -87,15 +104,6 @@ export default function SignedInActions({
   let voucherAmount = participant
     ? formatCurrency(participant.balance)
     : undefined;
-
-  // if (!participant) {
-  //   return (
-  //     <div className="flex flex-col items-center gap-4 text-lg">
-  //       <p>the connected wallet has not purchased any vouchers.</p>
-  //       <SignoutButton />
-  //     </div>
-  //   );
-  // }
 
   return (
     <>
@@ -156,18 +164,22 @@ export default function SignedInActions({
                   </p>
                 </>
               )}
-              {kycState === "not-found" && (
+              {kycState === "not-finalized" && (
                 <>
                   <p className="text-xl font-bold">
-                    Application State: Not Found
+                    Application State: Under Review
                   </p>
                   <p>
-                    You have not purchased any vouchers or we couldn&apos;t find
-                    your KYC application. Please check whether you have used the
-                    currently connected wallet ({address}) to purchase vouchers.
-                    If you think this is an error,{" "}
-                    <Link href="https://t.me/welsharehealth" isExternal>
-                      please contact us on Telegram
+                    You have submitted a KYC application using your address (
+                    {address}) and we&apos;re reviewing it. Please stand by and
+                    in case you have questions, don&apos;t hesitate to get in
+                    touch with us on{" "}
+                    <Link
+                      href="https://t.me/welsharehealth"
+                      isExternal
+                      className="inline"
+                    >
+                      our Telegram group
                     </Link>
                   </p>
                 </>
@@ -223,17 +235,6 @@ export default function SignedInActions({
           </p>
         </div>
       </div>
-
-      {/* 
-      {kycState === "failed" && (
-        <div className="flex flex-col items-center gap-4">
-          <XCircle fill="#ff1900" size={128} weight="fill" />
-          <p className="w-1/2 text-center text-lg">
-            You unfortunately did not pass the KYC process. If you provided an
-            email address, we&apos;ll get back to you.
-          </p>
-        </div>
-      )} */}
     </>
   );
 }

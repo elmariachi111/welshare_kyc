@@ -39,6 +39,7 @@ export const GET = async (req: NextRequest) => {
   const response = NextResponse.json({
     address: entry?.[0],
     status: entry?.[1],
+    final_approval: entry?.[2],
   });
   return response;
 };
