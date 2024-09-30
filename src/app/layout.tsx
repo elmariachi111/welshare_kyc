@@ -15,8 +15,8 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://presale.welshare.health"),
   title: {
-    default: "Welshare Presale Phase 1",
-    template: "%s | Welshare Presale Phase 1",
+    default: "Welshare Presale Phase 2",
+    template: "%s | Welshare Presale Phase 2",
   },
   description: "Apply for the $WEL Token now - Welshare Presale Phase 2",
   publisher: "Welshare Health UG",
