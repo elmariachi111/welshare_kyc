@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Address, formatEther } from "viem";
 import { useAccount } from "wagmi";
 import PersonaFlow from "./PersonaFlow";
+import { Button } from "@nextui-org/button";
 
 type Participant = {
   id: string;
@@ -111,27 +112,34 @@ export default function SignedInActions({
         <div className="flex flex-col md:flex-row bg-zinc-800 p-6 rounded-2xl gap-6 items-center w-full">
           <div className="flex flex-col md:flex-row w-full justify-stretch items-center gap-8">
             <div className="flex flex-col flex-grow space-y-2 md:w-3/4 ">
-              <p className="text-xl font-bold">Purchased Vouchers</p>
-
-              {voucherAmount ? (
-                <p>
-                  You have purchased <strong>{voucherAmount} Vouchers</strong>{" "}
-                  at{" "}
-                  <Link href="https://juicebox.money/@welshare" isExternal>
-                    juicebox.money/@welshare
-                  </Link>
-                  . Note: These are not the WEL tokens. The WEL tokens will be
-                  distributed to users who were accepted to purchase.
-                </p>
-              ) : (
-                <p>You have not purchased any vouchers.</p>
-              )}
+              <p className="text-xl font-bold">Purchase Vouchers</p>
+              <p>
+                <strong>
+                  Important: Use this connected wallet for purchase.
+                </strong>{" "}
+                Go to{" "}
+                <Link href="https://juicebox.money/@welshare" isExternal>
+                  juicebox.money/@welshare
+                </Link>{" "}
+                to purchase your desired amount of vouchers. Note: These are not
+                the WEL tokens. The WEL tokens will be distributed to people who
+                are accepted to purchase.
+                {kycState != "completed" ? "To apply, complete step 2." : null}
+              </p>
             </div>
-            {voucherAmount && (
-              <div className="flex md:w-1/4 flex-col items-center gap-2">
-                <p className="text-2xl font-bold"> {voucherAmount} vouchers</p>
-              </div>
-            )}
+            <div className="flex md:w-1/4 flex-col items-center gap-2">
+              <Button
+                radius="sm"
+                size="lg"
+                className="w-full bg-gradient-to-br from-[#07F1EF] to-[#3045FF] px-12"
+                as={Link}
+                href="https://juicebox.money/@welshare"
+                isExternal
+              >
+                Purchase Vouchers
+              </Button>
+              {voucherAmount && <p>{voucherAmount} Vouchers</p>}
+            </div>
           </div>
         </div>
 
