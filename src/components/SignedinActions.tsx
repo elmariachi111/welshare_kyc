@@ -6,6 +6,7 @@ import { Address, formatEther } from "viem";
 import { useAccount } from "wagmi";
 import PersonaFlow from "./PersonaFlow";
 import { Button } from "@nextui-org/button";
+import { PHASE3_ENDS, PHASE3_STARTS } from "@/app/constants";
 
 type Participant = {
   id: string;
@@ -41,30 +42,7 @@ export default function SignedInActions({
   referrer?: string | null;
 }) {
   const { address } = useAccount();
-  const [participant, setParticipant] = useState<Participant | null>();
-
-  useEffect(() => {
-    if (!address) return;
-    (async () => {
-      const res = await (
-        await fetch(`/api/jb?address=${address.toLowerCase()}`)
-      ).json();
-      if (res.data.participant) {
-        setParticipant({
-          id: res.data.participant.id,
-          projectId: res.data.participant.projectId,
-          address: res.data.participant.address,
-          balance: BigInt(res.data.participant.balance),
-          volume: BigInt(res.data.participant.volume),
-          volumeUSD: BigInt(res.data.participant.volumeUSD),
-          paymentsCount: res.data.participant.paymentsCount,
-          stakedBalance: BigInt(res.data.participant.stakedBalance),
-        });
-      } else {
-        setParticipant(null);
-      }
-    })();
-  }, [address]);
+  const [voucherAmount, setVoucherAmount] = useState<string | null>();
 
   useEffect(() => {
     if (!address) return;
@@ -78,6 +56,7 @@ export default function SignedInActions({
       }
 
       const res = await fetchRes.json();
+      setVoucherAmount(res.allocation);
 
       if (res.status === "N") {
         //seems unused
@@ -102,9 +81,27 @@ export default function SignedInActions({
     })();
   }, [address]);
 
-  let voucherAmount = participant
-    ? formatCurrency(participant.balance)
-    : undefined;
+  const [phase3Active, setPhase3Active] = useState(false);
+
+  useEffect(() => {
+    let timer: any;
+    const now = +new Date();
+    if (now < PHASE3_STARTS) {
+      setPhase3Active(false);
+      timer = setTimeout(() => {
+        setPhase3Active(true);
+      }, PHASE3_STARTS - now);
+    } else if (now < PHASE3_ENDS) {
+      setPhase3Active(true);
+      timer = setTimeout(() => {
+        setPhase3Active(false);
+      }, PHASE3_ENDS - now);
+    } else {
+      setPhase3Active(false);
+    }
+
+    return () => clearTimeout(timer);
+  });
 
   return (
     <>
@@ -131,6 +128,7 @@ export default function SignedInActions({
               <Button
                 radius="sm"
                 size="lg"
+                isDisabled={!phase3Active}
                 className="w-full bg-gradient-to-br from-[#07F1EF] to-[#3045FF] px-12"
                 as={Link}
                 href="https://juicebox.money/@welshare"

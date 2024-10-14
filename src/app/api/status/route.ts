@@ -25,11 +25,11 @@ export const GET = async (req: NextRequest) => {
 
   const result = await Sheets.spreadsheets.values.get({
     spreadsheetId: SPREADSHEET_ID,
-    range: "Sheet1!A2:C1250",
+    range: "Sheet1!A2:D1250",
   });
 
   const entry = result.data.values?.find(
-    (val: any[3]) => val[0].toLowerCase() === address.toLowerCase()
+    (val: any[4]) => val[0].toLowerCase() === address.toLowerCase()
   );
 
   if (!entry) {
@@ -40,6 +40,7 @@ export const GET = async (req: NextRequest) => {
     address: entry?.[0],
     status: entry?.[1],
     final_approval: entry?.[2],
+    allocation: entry?.[3] === "#N/A" ? null : entry?.[3],
   });
   return response;
 };

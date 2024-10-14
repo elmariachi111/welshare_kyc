@@ -15,10 +15,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://presale.welshare.health"),
   title: {
-    default: "Welshare Presale Phase 2",
-    template: "%s | Welshare Presale Phase 2",
+    default: "Welshare Presale Phase 3",
+    template: "%s | Welshare Presale Phase 3",
   },
-  description: "Apply for the $WEL Token now - Welshare Presale Phase 2",
+  description: "Apply for the $WEL Token now - Welshare Presale Phase 3",
   publisher: "Welshare Health UG",
   authors: [
     {
@@ -58,7 +58,7 @@ export default function RootLayout({
             <Providers>
               <Header />
               <h1 className="text-center mb-6 text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#2DE1FB] to-[#086BFA]">
-                Public Pre-Sale Phase 2
+                Public Pre-Sale Phase 3
               </h1>
               {children}
               <Analytics />

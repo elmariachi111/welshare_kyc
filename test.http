@@ -77,6 +77,14 @@ Origin: https://juicebox.money
   }
 }
 
+  # individual pay events per participant
+  # payEvents(where: {projectId:$projectId, from:"0x"}) {
+  #   from
+  #   amount
+  #   amountUSD
+  #   timestamp
+  # }
+
 ###
 
 GET http://localhost:3000/api/jb/?address=
