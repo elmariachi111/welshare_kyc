@@ -4,9 +4,15 @@ import React, { useState, useEffect } from "react";
 import { Chip } from "@nextui-org/chip";
 
 //todo: must be timezone agnostic!
-const Countdown = ({ targetDate }: { targetDate: string }) => {
+const Countdown = ({
+  targetDate,
+  children,
+}: {
+  targetDate: Date;
+  children: React.ReactNode;
+}) => {
   const calculateTimeLeft = () => {
-    const difference = +new Date(targetDate) - +new Date();
+    const difference = +targetDate - +new Date();
     let timeLeft = {};
 
     if (difference > 0) {
@@ -43,16 +49,16 @@ const Countdown = ({ targetDate }: { targetDate: string }) => {
     }
   });
 
+  if (!timerComponents.length) {
+    return null;
+  }
+
   return (
-    <div className="flex flex-col items-center justify-center gap-2">
-      <Chip variant="shadow" size="lg" color="primary" className="p-4">
-        {timerComponents.length ? (
-          timerComponents
-        ) : (
-          <span>Time&apos;s up!</span>
-        )}
+    <div className="flex flex-col items-center justify-center gap-1">
+      <Chip variant="shadow" size="lg" color="secondary" className="p-4 px-20">
+        {timerComponents}
       </Chip>
-      <p className="text-slate-400">until phase 3 starts</p>
+      <p className="text-slate-400">{children}</p>
     </div>
   );
 };
